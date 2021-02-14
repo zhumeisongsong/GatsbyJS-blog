@@ -1,16 +1,15 @@
 import React from "react"
-import { Link, PageProps } from "gatsby"
+import { Link, PageProps, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = (props: PageProps) => (
+const IndexPage = ({data}) => (
   <Layout>
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
+    <p>The text if from browser query</p>
+    <p>{data.site.siteMetadata.description}</p>
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
       <Image />
     </div>
@@ -18,4 +17,23 @@ const IndexPage = (props: PageProps) => (
   </Layout>
 )
 
+export const query =graphql`
+query HomePageQuery {
+  site {
+    siteMetadata {
+      description
+    }
+  }
+}
+`
+
+// export const query = graphql`
+// query {
+//   projects {
+//     name
+//   }
+// }
+// `
+
 export default IndexPage
+
